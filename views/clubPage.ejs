@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= club.club_name %> Details</title>
+  <link rel="stylesheet" type="text/css" href="/styles/clubstyles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><%= club.club_name %></h1>
+    </div>
+    <div class="info">
+      <div class="club-info">
+        <p><strong>Type:</strong> <%= club.type %></p>
+        <p><strong>Leaders:</strong> <%= club.leaders %></p>
+        <p><strong>Goals:</strong> <%= club.goals %></p>
+        <p><strong>Actions:</strong> <%= club.actions %></p>
+        <p><strong>Other Information:</strong> <%= club.other_info %></p>
+      </div>
+      <div class="back">
+        <a href="/">Back to Homepage</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

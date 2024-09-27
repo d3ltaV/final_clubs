@@ -1,0 +1,90 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    color: #031b35;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 4px solid #007bff;
+    padding-bottom: 13px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  
+}
+
+.club-info p {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 18px;
+  margin: 8px 0;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 200px;
+  padding-right: 20px;
+}
+
+.club-info strong {
+  white-space: nowrap;
+  color: #34495e;
+  font-weight: bold;
+  position: absolute;
+  left: 0; 
+  width: 150px;
+  padding-left: 20px;
+}
+
+.back {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.back a {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.back a:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .club-info strong {
+        width: 120px;
+    }
+
+    .back a {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}

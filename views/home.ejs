@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clubs Homepage</title>
+  <link rel="stylesheet" href="/styles/homestyles.css">
+</head>
+<body>
+  <header>
+    <h1>NMH Clubs Homepage</h1>
+    <div class="menu">
+      <% types.forEach(type => { %>
+        <div class="dropdown">
+          <button class="dropbtn"><%= type %></button>
+          <div class="dropdown-content">
+            <% clubsByType[type].forEach(club => { %>
+              <a href="/club/<%= club.id %>"><%= club.club_name %></a>
+            <% }) %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </header>
+  <div class="container">
+    <h3>Here, you will find a list of all the NMH student-led clubs. They are sorted by type. Click on the club for more information!</h3>
+    <div class="generalInfo">
+      <div class="item">
+        <img src="/images/interest.png" alt="Student Interest Clubs" class="image">
+        <div class="text">These are clubs that enjoy a hobby together.
+           The contact person for these groups is Elizabeth Edwards.</div>
+      </div>
+      <div class="item">
+        <img src="/images/service.png" alt="Student Service Clubs" class="image">
+        <div class="text">These are groups that take action to give back to the greater community beyond the groups themselves. 
+          The contact person for these clubs is Kensey Bachelder.
+        </div>
+      </div>
+      <div class="item">
+        <img src="/images/affinity.png" alt="Affinity Groups" class="image">
+        <div class="text">These are groups that share an aspect of personal identity. The contact people 
+          for these groups are Lee Ellen Strawn for Spiritual Groups and James 
+          Greenwood for All Other Identity-Based Groups.
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <img src="/images/NMHlogo-removebg-preview.png" alt="NMH Clubs" class="img1">
+  </footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  transform: scale(0.61);
+  transform-origin: top left;
+  width: 170%;
+  height: 150%;
+  overflow: hidden;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.dropbtn {
+  background-color: #007bff;
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  max-height: 700px; 
+  overflow-y: auto; /** allow scrolling **/
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #c5d3e2;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #0056b3;
+}
+
+.container h3 {
+  text-align: center;
+  color:#031b35;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  line-height: 1.5;
+  padding: 20px 15px 15px 15px;
+  margin: 10px 10px 10px 10px;
+}
+.img1 {
+  position: relative;
+  bottom: 20px;
+  right: 20px;
+  width: auto;
+  max-width: 200px;
+  max-height: 100px;
+  height: auto;
+  padding-left: 20px;
+}
+
+.generalInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; 
+  margin: 20px auto;
+  max-width: 70%;
+  background-color: #ffffff; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 150px; 
+  height: auto; 
+  margin-right: 20px; 
+}
+
+.text {
+  font-size: 18px; 
+  color: #333;
+  margin-right: 20px;
+  max-width: calc(100% - 170px);
+  text-align: left;
+}
