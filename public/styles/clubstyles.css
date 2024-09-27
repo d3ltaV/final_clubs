@@ -4,9 +4,13 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
+    display: flex;             /* Use flexbox */
+    flex-direction: column;    /* Align items vertically */
+    height: 100vh;       
 }
 
 .container {
+    flex: 1;
     max-width: 900px;
     margin: 40px auto;
     padding: 20px;
@@ -75,7 +79,7 @@ body {
     padding: 20px;
     background-color: #7E2D40;
     color: white;
-    position: relative;
+    /* position: relative; */
     bottom: 0;
     width: 100%;
     margin-top: 40px;
