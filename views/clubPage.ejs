@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= club.club_name %> Details</title>
@@ -7,9 +7,9 @@
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1><%= club.club_name %></h1>
-    </div>
+    <header class="header">
+      <h1 class="club-title"><%= club.club_name %></h1>
+    </header>
     <div class="info">
       <div class="club-info">
         <p><strong>Type:</strong> <%= club.type %></p>
@@ -23,5 +23,9 @@
       </div>
     </div>
   </div>
+
+  <footer class="footer">
+    <p>© Hogger News | NMH TV | news for students by students</p>
+  </footer>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -16,40 +15,38 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header h1 {
-    color: #031b35;
-    font-size: 36px;
+.header {
+    background-color: #002855;
+    color: white;
+    padding: 20px;
     text-align: center;
-    margin-bottom: 30px;
-    border-bottom: 4px solid #007bff;
-    padding-bottom: 13px;
+}
+
+.club-title {
+    font-size: 36px;
+    margin: 0;
 }
 
 .info {
     display: flex;
     flex-direction: column;
     gap: 15px;
-  
+}
+
+.club-info {
+    padding: 10px;
 }
 
 .club-info p {
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-size: 18px;
-  margin: 8px 0;
-  line-height: 1.6;
-  position: relative;
-  padding-left: 200px;
-  padding-right: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    margin: 8px 0;
+    line-height: 1.6;
 }
 
 .club-info strong {
-  white-space: nowrap;
-  color: #34495e;
-  font-weight: bold;
-  position: absolute;
-  left: 0; 
-  width: 150px;
-  padding-left: 20px;
+    color: #34495e;
+    font-weight: bold;
 }
 
 .back {
@@ -60,7 +57,7 @@ body {
 .back a {
     display: inline-block;
     padding: 12px 20px;
-    background-color: #007bff;
+    background-color: #007bff; /* NMH Blue */
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -70,17 +67,32 @@ body {
 }
 
 .back a:hover {
-    background-color: #0056b3;
-    cursor: pointer;
+    background-color: #0056b3; 
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #7E2D40;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
 }
 
 @media (max-width: 600px) {
-    .header h1 {
+    .club-title {
         font-size: 28px;
     }
 
     .club-info strong {
-        width: 120px;
+        width: auto;
     }
 
     .back a {
