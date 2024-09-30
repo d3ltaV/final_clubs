@@ -1,108 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=0.9">
-  <title>NMH Clubs Homepage</title>
-  <link rel="stylesheet" href="/styles/homestyles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/styles/homestyles.css">
 </head>
 <body>
   <header>
     <h1>NMH Clubs Homepage</h1>
-    <div class="menu">
-      <% types.forEach(type => { %>
-        <div class="dropdown">
-          <button class="dropbtn"><%= type %></button>
-          <div class="dropdown-content">
-            <% clubsByType[type].forEach(club => { %>
-              <a href="/club/<%= club.id %>"><%= club.club_name %></a>
-            <% }) %>
-          </div>
-        </div>
-      <% }) %>
+    <div class="welcomeMessage">
+      <p>The Hogger News brings to you the NMH Clubs Database!</p>
+      <p>Here, you will find a list of all the NMH student-led clubs. They are sorted by type. Click on the club for more information!</p>
     </div>
   </header>
-  <div class="container">
-    <h4>On behalf of Hogger News, welcome to the NMH Clubs Database!</h4>
-    <h3>Here, you will find a list of all the NMH student-led clubs. They are sorted by type. Click on the club for more information!</h3>
-    <div class="generalInfo">
-      <div class="item">
-        <img src="/images/interest.png" alt="Student Interest Clubs" class="image">
-        <div class="text">These are clubs that enjoy a hobby together.
-           The contact person for these groups is Elizabeth Edwards.</div>
+
+  <div class="center-section">
+    <div class="left">
+      <div class="image-section">
+        <img src="/images/NMHlogo-removebg-preview.png" alt="Club Groups" class="center-image">
       </div>
-      <div class="item">
-        <img src="/images/service.png" alt="Student Service Clubs" class="image">
-        <div class="text">These are groups that take action to give back to the greater community beyond the groups themselves. 
-          The contact person for these clubs is Kensey Bachelder.
-        </div>
-      </div>
-      <div class="item">
-        <img src="/images/affinity.png" alt="Affinity Groups" class="image">
-        <div class="text">These are groups that share an aspect of personal identity. The contact people 
-          for these groups are Lee Ellen Strawn for Spiritual Groups and James 
-          Greenwood for All Other Identity-Based Groups.
+    </div>
+    <div class="right">
+      <div class="dropdown-section">
+        <div class="menu">
+          <% types.forEach(type => { %>
+            <div class="dropdown">
+              <div class="dropdown-container">
+                <button class="dropbtn"><%= type %></button>
+                <div class="dropdown-description">
+                  <% if (type === 'Student Interest') { %>
+                    These are clubs that enjoy a hobby together. The contact person for these groups is Elizabeth Edwards.
+                  <% } else if (type === 'Student Service') { %>
+                    These are groups that take action to give back to the community. The contact person is Kensey Bachelder.
+                  <% } else if (type === 'Affinity Group') { %>
+                    These groups share a personal identity. The contacts are Lee Ellen Strawn and James Greenwood.
+                  <% } %>
+                </div>
+              </div>
+              <div class="dropdown-content">
+                <% clubsByType[type].forEach(club => { %>
+                  <a href="/club/<%= club.id %>"><%= club.club_name %></a>
+                <% }) %>
+              </div>
+            </div>
+            
+          <% }) %>
         </div>
       </div>
     </div>
   </div>
+
   <footer>
-    <img src="/images/NMHlogo-removebg-preview.png" alt="NMH Clubs" class="img1">
-    <div class="footer-content">
-      <p>Hogger News | NMH TV | News for students by students</p>
-    </div>
+    <p>Hogger News | NMH TV | news for students by students</p>
   </footer>
 </body>
 </html>
-
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clubs Homepage</title>
-  <link rel="stylesheet" href="/styles/homestyles.css">
-</head>
-<body>
-  <header>
-    <h1>NMH Clubs Homepage</h1>
-    <div class="menu">
-      <% types.forEach(type => { %>
-        <div class="dropdown">
-          <button class="dropbtn"><%= type %></button>
-          <div class="dropdown-content">
-            <% clubsByType[type].forEach(club => { %>
-              <a href="/club/<%= club.id %>"><%= club.club_name %></a>
-            <% }) %>
-          </div>
-        </div>
-      <% }) %>
-    </div>
-  </header>
-  <div class="container">
-    <h3>Here, you will find a list of all the NMH student-led clubs. They are sorted by type. Click on the club for more information!</h3>
-    <div class="generalInfo">
-      <div class="item">
-        <img src="/images/interest.png" alt="Student Interest Clubs" class="image">
-        <div class="text">These are clubs that enjoy a hobby together.
-           The contact person for these groups is Elizabeth Edwards.</div>
-      </div>
-      <div class="item">
-        <img src="/images/service.png" alt="Student Service Clubs" class="image">
-        <div class="text">These are groups that take action to give back to the greater community beyond the groups themselves. 
-          The contact person for these clubs is Kensey Bachelder.
-        </div>
-      </div>
-      <div class="item">
-        <img src="/images/affinity.png" alt="Affinity Groups" class="image">
-        <div class="text">These are groups that share an aspect of personal identity. The contact people 
-          for these groups are Lee Ellen Strawn for Spiritual Groups and James 
-          Greenwood for All Other Identity-Based Groups.
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer>
-    <img src="/images/NMHlogo-removebg-preview.png" alt="NMH Clubs" class="img1">
-  </footer>
-</body>
-</html> -->

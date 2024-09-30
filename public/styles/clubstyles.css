@@ -61,7 +61,7 @@ body {
 .back a {
     display: inline-block;
     padding: 12px 20px;
-    background-color: #007bff; /* NMH Blue */
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -71,15 +71,186 @@ body {
 }
 
 .back a:hover {
-    background-color: #0056b3; 
+    background-color: #f1b434; 
 }
 
 .footer {
     text-align: center;
     padding: 20px;
     background-color: #7E2D40;
-    color: white;
-    /* position: relative; */
+    color: white;/* Basic body styling with flexbox layout */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        height: 100vh; /* Ensures body takes up full viewport height */
+    }
+    
+    /* Header styles */
+    header {
+        background-color: #002855; /* Dark NMH blue */
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    h1 {
+        margin: 0;
+    }
+    
+    /* Flexbox layout for menu section */
+    .menu {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    /* Dropdown menu styles */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    .dropbtn {
+        background-color: #007bff; /* Blue button */
+        color: white;
+        padding: 14px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        z-index: 1;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+    
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: #c5d3e2;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+        background-color: #f1b434; /* Hover effect */
+    }
+    
+    /* Container for general content */
+    .container {
+        flex: 1; /* Fills the remaining space */
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    h4 {
+        text-align: center;
+        color: #031b35; /* Dark text color */
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding: 0px 15px 15px 15px;
+    }
+    
+    h3 {
+        text-align: center;
+        color: #031b35; /* Dark text color */
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding: 25px 15px 0px 15px;
+    }
+    
+    /* General info section with flex layout for items */
+    .generalInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        margin: 20px 0;
+    }
+    
+    /* Item styles */
+    .item {
+        display: flex;
+        align-items: center;
+        max-width: 600px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Image styles */
+    .image {
+        width: 150px; 
+        height: auto;
+        margin-right: 20px;
+    }
+    
+    /* Text content within the item */
+    .text {
+        font-size: 18px;
+        color: #333;
+        max-width: calc(100% - 170px);
+    }
+    
+    /* Footer styles */
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #7E2D40; /* Maroon red for footer */
+        color: white;
+        margin-top: auto; /* Pushes footer to bottom */
+        width: 100%;
+    }
+    
+    /* Footer image style */
+    .img1 {
+        width: 150px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    
+    .footer-content p {
+        margin: 0;
+        font-size: 14px;
+    }
+    
+    /* Responsive styling */
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 28px;
+        }
+    
+        .image {
+            width: 100px;
+        }
+    
+        .text {
+            font-size: 16px;
+        }
+    }
+    
+    position: relative;
     bottom: 0;
     width: 100%;
     margin-top: 40px;
