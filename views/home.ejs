@@ -37,7 +37,9 @@
                 </div>
               </div>
               <div class="dropdown-content">
-                <% clubsByType[type].forEach(club => { %>
+                <% clubsByType[type]
+                    .sort((a, b) => a.club_name.localeCompare(b.club_name))
+                    .forEach(club => { %>
                   <a href="/club/<%= club.id %>"><%= club.club_name %></a>
                 <% }) %>
               </div>
