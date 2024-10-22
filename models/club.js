@@ -21,50 +21,62 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    timestamp: {
-      type: DataTypes.STRING,
-    },
-    email_address: {
-      type: DataTypes.STRING,
-    },
-    club_exists: {
+    type: {
       type: DataTypes.STRING,
     },
     club_name: {
       type: DataTypes.STRING,
     },
-    leaders: {
+    description: {
+      type: DataTypes.TEXT('long'),
+    },
+    meet_info: {
       type: DataTypes.STRING,
-    },
-    advisor_name: {
-      type: DataTypes.STRING,
-    },
-    advisor_email: {
-      type: DataTypes.STRING,
-    },
-    type: {
-      type: DataTypes.STRING,
-    },
-    goals: {
-      type: DataTypes.TEXT('long'),
-      allowNull: false
-    },
-    actions: {
-      type: DataTypes.TEXT('long'),
-      allowNull: false
-    },
-    committed_students: {
-      type: DataTypes.TEXT('long'),
-      allowNull: false
-    },
-    meeting_info: {
-      type: DataTypes.TEXT('long'),
-      allowNull: false
-    },
-    other_info: {
-      type: DataTypes.TEXT('long'),
-      allowNull: false
     }
+    // timestamp: {
+    //   type: DataTypes.STRING,
+    // },
+    // email_address: {
+    //   type: DataTypes.STRING,
+    // },
+    // club_exists: {
+    //   type: DataTypes.STRING,
+    // },
+    // club_name: {
+    //   type: DataTypes.STRING,
+    // },
+    // leaders: {
+    //   type: DataTypes.STRING,
+    // },
+    // advisor_name: {
+    //   type: DataTypes.STRING,
+    // },
+    // advisor_email: {
+    //   type: DataTypes.STRING,
+    // },
+    // type: {
+    //   type: DataTypes.STRING,
+    // },
+    // goals: {
+    //   type: DataTypes.TEXT('long'),
+    //   allowNull: false
+    // },
+    // actions: {
+    //   type: DataTypes.TEXT('long'),
+    //   allowNull: false
+    // },
+    // committed_students: {
+    //   type: DataTypes.TEXT('long'),
+    //   allowNull: false
+    // },
+    // meeting_info: {
+    //   type: DataTypes.TEXT('long'),
+    //   allowNull: false
+    // },
+    // other_info: {
+    //   type: DataTypes.TEXT('long'),
+    //   allowNull: false
+    // }
   }, {
     sequelize,
     modelName: 'Club',

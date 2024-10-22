@@ -9,7 +9,6 @@
     <h1>NMH Clubs Homepage</h1>
     <div class="welcomeMessage">
       <p>Search or scroll through all the NMH student-led clubs. Click on the club for more information!</p>
-      <p>The NMH Clubs Database is proudly brought to you by Hogger News.</p>
     </div>
   </header>
 
@@ -27,12 +26,14 @@
               <div class="dropdown-container">
                 <button class="dropbtn"><%= type %></button>
                 <div class="dropdown-description">
-                  <% if (type === 'Student Interest') { %>
+                  <% if (type === 'Interest Club') { %>
                     These are clubs that enjoy a hobby together. The contact person for these groups is Elizabeth Edwards.
-                  <% } else if (type === 'Student Service') { %>
+                  <% } else if (type === 'Service Club') { %>
                     These are groups that take action to give back to the community. The contact person is Kensey Bachelder.
                   <% } else if (type === 'Affinity Group') { %>
                     These groups share a personal identity. The contacts are Lee Ellen Strawn and James Greenwood.
+                  <% } else if (type === 'Spiritual Life Group') { %>
+                    These are groups where people can find community no matter your religion or beliefs.
                   <% } %>
                 </div>
               </div>
@@ -52,6 +53,8 @@
   </div>
 
   <footer>
+    <p>The NMH Clubs Database is proudly brought to you by Hogger News.</p>
+    <P>This is a student created web application in its beta stage. Please report any bugs or issues to hoggernews@nmhschool.org.</P>
     <p>Hogger News | NMH TV | news for students by students</p>
   </footer>
 </body>

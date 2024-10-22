@@ -13,10 +13,14 @@
     <div class="info">
       <div class="club-info">
         <p><strong>Type:</strong> <%= club.type %></p>
-        <p><strong>Leaders:</strong> <%= club.leaders %></p>
-        <p><strong>Goals:</strong> <%= club.goals %></p>
-        <p><strong>Actions:</strong> <%= club.actions %></p>
-        <p><strong>Other Information:</strong> <%= club.other_info %></p>
+        <p><strong>Club Description:</strong> <%= club.description %></p>
+        <p><strong>Meeting Info:</strong> <%= club.meet_info %></p>
+        <p>
+          <strong>Click here for more info:</strong> 
+          <a href="https://docs.google.com/spreadsheets/d/1pHWVTkt4caD2Lk5HxjySXDmKmnweBhGaidKeI7rs5jE/edit?gid=2107835340#gid=2107835340" target="_blank">
+            Link
+          </a>
+        </p>        
       </div>
       <div class="back">
         <a href="/">Back to Homepage</a>
@@ -25,6 +29,8 @@
   </div>
 
   <footer class="footer">
+    <p>The NMH Clubs Database is proudly brought to you by Hogger News.</p>
+    <P>This is a student created web application in its beta stage. Please report any bugs or issues to hoggernews@nmhschool.org.</P>
     <p>© Hogger News | NMH TV | news for students by students</p>
   </footer>
 </body>
