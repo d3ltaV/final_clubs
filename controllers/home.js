@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 
 async function fetchAndProcessCSV(csvURL) {
+  let idCounter = 0;
   const clubs = [];
   try {
     const response = await axios.get(csvURL, {responseType: 'stream' });
@@ -21,6 +22,7 @@ async function fetchAndProcessCSV(csvURL) {
 
           if (typeOfClub.length > 0 && nameOfClub.length > 0 && descriptionOfClub.length > 0 && meetInfo.length > 0) {
             clubs.push({
+              id: idCounter++,
               type: typeOfClub,
               club_name: nameOfClub,
               description: descriptionOfClub,
