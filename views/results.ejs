@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles/resultstyles.css">
+    <title>Club Search Results</title>
+</head>
+<body>
+    <h1>Search Results for "<%= keywords %>"</h1>
+    <% if (clubs.length > 0) { %>
+        <ul>
+            <% clubs.forEach(club => { %>
+                <li>
+                    <h2>
+                        <a href="/club/<%= club.id %>"><%= club.club_name %></a>
+                    </h2>
+                    <p><strong>Type:</strong> <%= club.type %></p>
+                    <!-- <p>Description: <%= club.description %></p>
+                    <p>Meeting Info: <%= club.meet_info %></p> -->
+                </li>
+            <% }) %>
+        </ul>
+        <div class="back">
+            <a href="/">Back to Homepage</a>
+          </div>
+    <% } else { %>
+        <p>No clubs match your search criteria.</p>
+        <div class="back">
+            <a href="/">Back to Homepage</a>
+        </div>
+    <% } %>
+</body>
+</html>

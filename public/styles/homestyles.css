@@ -6,13 +6,11 @@
 
 html, body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
+  background: linear-gradient(to bottom right, #f4f4f4, #e8e8e8);
   min-height: 100vh;
-  /* width: 118%; */
-  /* height: 139%; */
   display: flex;
   flex-direction: column;
-
   transform-origin: top left;
   overflow-x: hidden;
 }
@@ -23,12 +21,24 @@ header {
   color: white;
   padding: 20px;
   text-align: center;
+  min-height: 15vh;
+  font-size: 3vh;
+  position: relative;
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #002855, #007bff);
 }
 
 .welcomeMessage {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 3.5vh;
   line-height: 1.6;
   color: #ffffff; 
 }
@@ -36,19 +46,20 @@ header {
 .center-section {
   display: flex;
   padding: 20px;
-  height: 70vh;
+  height: auto;
+  margin-bottom: 2vh;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding: 5vh 5vh 5vh 5vh;
 }
 
 .left, .right {
   display: flex; 
   flex-direction: column;
   justify-content: center;
-  width: 48%; 
   background-color: #ffffff;
-  border: 4px solid #F1B434;
+  /* border: 4px solid #F1B434; */
   border-radius: 8px; 
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
   margin: 10px;
@@ -57,9 +68,18 @@ header {
 .left {
   padding: 0px 0px 0px 0px;
   width: 30%;
+  border-color: #ffffff;
 }
 .right {
   width: 65%;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 0px 0px;
+  /* border: double 4px transparent;
+  background-image: linear-gradient(white, white), 
+  linear-gradient(45deg, #002855, #0352a6, #007bff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box; */
 }
 
 .image-section {
@@ -67,12 +87,12 @@ header {
   justify-content: center;
   align-items: center;
   height: 100%; 
-  padding-right: 35px;
+  margin-right: 10%; 
 }
 
 .center-image {
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
 }
 
@@ -84,65 +104,111 @@ header {
 }
 
 .menu {
-  padding-top: 20px;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  /* margin-left: 65px; */
+  height: 100%;
 }
 
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding-top: 2%; */
+  padding-bottom: 3%;
+}
+.searchlabel {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 3vh;
+  font-weight:bold;
+  margin-right: 5vh;
+}
+.searchbtn {
+  padding: 10px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 2vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.search input[type="text"] {
+  padding: 1vh;
+  width: 40vh;
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  font-size: 2vh;
+  transition: border-color 0.3s ease;
+}
+
+.search input[type="text"]:focus {
+  border-color: #007bff; 
+  outline: none;
+}
+.searchbtn:hover {
+  /* background-color: #0056b3;  */
+  background-color: #f1b434;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(241, 180, 52, 0.3);
+}
+
+.searchbtn:active {
+  background-color: #003f7f;
+}
 .dropdown {
   display: flex;
-  position: relative;
   flex-direction: column;
-  margin-bottom: 20px;
   width: 100%; 
+  height: 50%;
 }
-
 .dropdown-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 14px;
 }
-
 .dropbtn {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #007bff;
   color: white;
-  height: 50px;
   text-align: center;
   font-size: 16px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 20px;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  width: 200px; 
-  margin-left: 40px;
+  height: 70%;
+  padding: 1em 2em;
+  margin: 10px 0;
+  
 }
-
 .dropdown:hover .dropbtn {
-  background-color: #F1B434;
+  background-color: #f1b434;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(241, 180, 52, 0.3);
 }
 
 .dropdown-content {
   background-color: #f9f9f9;
   display: none;
   position: absolute;
-  min-width: 200px;
+  min-width: 10vw;
+  max-width: 30vw;
   z-index: 1;
-  max-height: 200px;
-  top: 100%; 
+  max-height: 15vh;
+  left: 65%;
   margin-top: 0; 
   overflow-y: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  /* border: 1px solid #002855; */
-  min-height: 150px;
+  font-size: 3vh;
+  min-height: 30vh;
 }
 
 .dropdown:hover .dropdown-content {
@@ -151,10 +217,11 @@ header {
 
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 1vh 2.5vh;
   text-decoration: none;
   display: block;
   transition: background-color 0.2s, color 0.2s;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .dropdown-content a:hover {
@@ -164,10 +231,10 @@ header {
 }
 
 .dropdown-description {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: #341515;
-  font-size: 14px;
-  width: 250px; 
+  width: 45vh;
+  font-size: 3vh;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -175,60 +242,156 @@ header {
   padding: 10px;
   margin-right: 50px;
 }
-
 footer {
+  position: relative;
   background-color: #7E2D40;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 2vh;
+  padding-top: 3vh;
   margin-top: auto; 
+  min-height: 12vh;
+  font-size: 3vh;
+  line-height: 4vh;  
+  width: 100%;
 }
 
-@media (max-width: 768px) {
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #7E2D40, #F1B434);
+}
+@media (max-width: 480px) {
+  .dropbtn {
+    width: 90%;
+    font-size: 14px;
+  }
+  .dropdown-description {
+    font-size: 2.5vh;
+  }
+  .search {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-left: 0%;
+  }
+  .searchlabel {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 0; 
+    text-align: center;
+  }
+  .search input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;  
+  }
+  .searchbtn {
+    padding: 10px;
+    width: 80%;
+    /* margin-left: 0;   */
+  }
+  .dropdown-content {
+    left: 30%;
+  }
+}
+
+@media (max-width: 1023px) {
   .center-section {
     flex-direction: column; 
-    height: auto;
   }
-
   .left, .right {
     width: 100%; 
     margin: 10px 0; 
   }
-  .welcomeMessage {
-    font-size: 16px; 
+  .left {
+    order: 1;
+  }
+  .right-side {
+    order: 2;
+  }
+  .search {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-left: 15%;
+  }
+  .searchlabel {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 0; 
+    text-align: center;
   }
 
-  .dropbtn {
-    width: 100%; 
-  }
-
-  .dropdown-description {
-    font-size: 12px;
-    width: 100%; 
-  }
-}
-
-@media (max-width: 480px) {
-  .welcomeMessage {
-    font-size: 14px;
-  }
-
-  .dropdown-content a {
+  .search input[type="text"] {
     padding: 10px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;  
   }
+  .searchbtn {
+    padding: 10px;
+    width: 80%;
+    margin-left: 0;  
+  }
+  .dropbtn {
+    width: 30vw; 
+    margin-left: 10%;
+    /* height: 0%; */
+    font-size: 2.5vh;
+  }
+  .dropdown-description {
+    font-size: 2.5vh;
+    width: 40vw;
+  }
+  .dropdown-content {
+    position: absolute;
+    min-width: 20vh;
+    z-index: 1;
+    max-height: 10vh;
+    left: 45%;
+    margin-top: 0; 
+    border-radius: 5px;
+    min-height: 30vh;
+  }
+  
 }
 @media (min-width: 1024px) {
-  .center-section {
-    height: 80vh;
-  }
-
-  .welcomeMessage {
-    font-size: 20px; 
-  }
   .dropbtn {
-    width: 250px;
+    width: 40vh;
   }
   .dropdown-description {
-    font-size: 16px;
+    font-size: 2.5vh;
   }
+  .dropdown-content {
+    left: 63%;
+  }
+}
+
+@media (min-width: 2048px) {
+  .dropbtn {
+    width: 40vh;
+    font-size: 2vh;
+  }
+  .dropdown-content {
+    min-width: 50vh;
+    z-index: 1;
+    left: 65%;
+  }
+  
 }

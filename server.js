@@ -10,8 +10,10 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static('public'));
 app.use(bodyParser.json());
-const homeRouter = require('./controllers/home.js');
-app.use('/', homeRouter);
+const clubRoutes = require('./routes/clubRoutes');
+// const homeRouter = require('./controllers/home.js');
+app.use('/', clubRoutes);
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

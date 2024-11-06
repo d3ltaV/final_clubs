@@ -1,48 +1,10 @@
-//get all clubs from CSV
+//functions that fetch the club informatinos to help display them
 require('dotenv').config({ path: '.env' });
-const axios = require('axios');
-const csv = require('csv-parser');
-const express = require('express');
-const router = express.Router();
+const { fetchAndProcessCSV } = require('./fetch');
+// const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNaoVZbJpLB-65ht7ICw-uEnf2Y4wHa0p69lYt2FYYZYC9Dvdlnt02UJ6ZobCqSA86QWGr0EcxYbwN/pub?gid=2107835340&single=true&output=csv';
+const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSDnX_41zq0zQN25XLu18Bi7UNVbDM2WfAu5RhFxYdiOL4i_tAW6erRWFy14rIH3R42wlE9RfFSnuG7/pub?gid=941127494&single=true&output=csv';
 
-async function fetchAndProcessCSV(csvURL) {
-  let idCounter = 0;
-  const clubs = [];
-  try {
-    const response = await axios.get(csvURL, {responseType: 'stream' });
-
-    return new Promise((resolve, reject) => {
-      response.data
-        .pipe(csv())
-        .on('data', (row) => {
-          const typeOfClub = row['Type of Club'] ? row['Type of Club'].trim() : '';
-          const nameOfClub = row['Name of Club '] ? row['Name of Club '].trim() : '';
-          const descriptionOfClub = row['Description of Club '] ? row['Description of Club '].trim() : '';
-          const meetInfo = row['Club Meeting Time and Location'] ? row['Club Meeting Time and Location'].trim() : '';
-
-          if (typeOfClub.length > 0 && nameOfClub.length > 0 && descriptionOfClub.length > 0 && meetInfo.length > 0) {
-            clubs.push({
-              id: idCounter++,
-              type: typeOfClub,
-              club_name: nameOfClub,
-              description: descriptionOfClub,
-              meet_info: meetInfo,
-            });
-          }
-        })
-        .on('end', () => resolve(clubs))
-        .on('error', (error) => reject(error));
-    });
-  } catch (error) {
-    console.error('Error fetching or processing CSV:', error);
-    throw error;
-  }
-}
-
-const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNaoVZbJpLB-65ht7ICw-uEnf2Y4wHa0p69lYt2FYYZYC9Dvdlnt02UJ6ZobCqSA86QWGr0EcxYbwN/pub?gid=2107835340&single=true&output=csv';
-
-router.get('/', async (req, res) => {
-  console.log('DISPLAY ALL');
+const getAllClubs = async (req, res) => {
   try {
     const clubs = await fetchAndProcessCSV(csvURL);
     const types = [...new Set(clubs.map(club => club.type))];
@@ -51,33 +13,41 @@ router.get('/', async (req, res) => {
       return acc;
     }, {});
     res.render('home', { types, clubsByType });
-    console.log(types);
-    console.log(clubs);
+    // console.log(types);
+    // console.log(clubs);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
   }
-});
-router.get('/club/:id', async (req, res) => {
+};
+
+const getClubById = async (req, res) => {
   try {
     const clubs = await fetchAndProcessCSV(csvURL);
-    console.log(clubs);
-    const clubId = parseInt(req.params.id, 10);
+    // console.log(clubs);
+    // const clubId = parseInt(req.params.id, 10);
 
-    if (isNaN(clubId) || clubId < 0 || clubId >= clubs.length) {
+    // if (isNaN(clubId) || clubId < 0 || clubId >= clubs.length) {
+    //   return res.status(404).send('Club not found');
+    // }
+
+    // const club = clubs[clubId];
+    const clubName = req.params.id; // changed from id to club name
+    const club = clubs.find(c => c.id === clubName);
+    if (!club) {
       return res.status(404).send('Club not found');
     }
-
-    const club = clubs[clubId];
     res.render('clubPage', { club });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
   }
-});
+};
 
-module.exports = router;
-
+module.exports = {
+  getAllClubs,
+  getClubById,
+};
 // const express = require('express');
 // const router = express.Router();
 // const { Club } = require('../models');

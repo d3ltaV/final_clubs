@@ -1,4 +1,4 @@
-
+//discarded
 const {
   Model
 } = require('sequelize');
