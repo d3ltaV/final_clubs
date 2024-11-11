@@ -1,8 +1,18 @@
 NMH Clubs Database!
-1. import-csv.js: Sheets is uploaded as a CSV file on the web, reads from that URL and drops/creates POSTGRES table with data
-2. Public folder: images and CSS
-3. Views folder: HTML, homepage and clubpage.
-4. Models: Clubs models containing club name, club type, description of club, and meeting info
-5. Controllers: home.js fetches all valid clubs (where all fields have string length > 0) and renders the homepage.
-6. Config: configuration, sets up database/sequelize instance
-7. UPDATE: no use of database, reads directly from CSV url.
+Here, you will find information regarding NMH Clubs! Search via keyword(s) or look through the clubs categorized by type. 
+
+1. Controllers:
+    -fetch.js: function to get all club data from Google Sheets
+    -filter.js: gets all filtered clubs
+    -home.js: gets all clubs sorted by type
+2. Public: 
+    -images:
+        -pig image
+    -styles:
+        -clubstyles.css: style for individual club page
+        -resultstyles.css: style for search result page
+        -homestyles.css: style for homepage
+3. Routes:
+    -clubRoutes.js: defines searching and club routes
+
+Note that databases were discarded, hence the models, migration files, and import-csv.js file are obsolete.
