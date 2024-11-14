@@ -18,6 +18,13 @@ async function fetchAndProcessCSV(csvURL) {
           const descriptionOfClub = row['Description of Club '] ? row['Description of Club '].trim() : '';
           const meetInfo = row['Club Meeting Time and Location'] ? row['Club Meeting Time and Location'].trim() : '';
           const publish = row['Publish'] ? row['Publish'].trim() : '';
+          const names = row['Student Leaders (and contact info)'];
+          let cleanNamesOnly = names
+            .split(/\s*\S+@\S+\.\S+\s*/) // Split by email pattern
+            .filter(Boolean) // Remove empty elements
+            .map(name => name.trim()) // Trim extra spaces
+            .join(', '); // Join names with comma and space
+          cleanNamesOnly = cleanNamesOnly.replace(/,\s*$/, '');
           if (typeOfClub.length > 0 && nameOfClub.length > 0 && descriptionOfClub.length > 0 && meetInfo.length > 0 && publish === "YES") {
             clubs.push({
               // id: idCounter++,
@@ -27,6 +34,7 @@ async function fetchAndProcessCSV(csvURL) {
               description: descriptionOfClub,
               meet_info: meetInfo,
               publish: publish,
+              names: cleanNamesOnly,
             });
           }
         })

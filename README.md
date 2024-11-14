@@ -17,7 +17,7 @@ Controllers handle the data-fetching and filtering functionality.
 These are static files used for displaying the content.
 
 #### - **Images**
-- **`pig.jpg`**: Image used on the homepage.
+- **`pig.png`**: Image used on the homepage.
 
 #### - **Styles**
 - **`clubstyles.css`**: Styles specific to individual club pages.

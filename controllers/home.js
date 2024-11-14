@@ -2,7 +2,7 @@
 require('dotenv').config({ path: '.env' });
 const { fetchAndProcessCSV } = require('./fetch');
 // const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNaoVZbJpLB-65ht7ICw-uEnf2Y4wHa0p69lYt2FYYZYC9Dvdlnt02UJ6ZobCqSA86QWGr0EcxYbwN/pub?gid=2107835340&single=true&output=csv';
-const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSDnX_41zq0zQN25XLu18Bi7UNVbDM2WfAu5RhFxYdiOL4i_tAW6erRWFy14rIH3R42wlE9RfFSnuG7/pub?gid=941127494&single=true&output=csv';
+const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSDnX_41zq0zQN25XLu18Bi7UNVbDM2WfAu5RhFxYdiOL4i_tAW6erRWFy14rIH3R42wlE9RfFSnuG7/pub?gid=2107835340&single=true&output=csv';
 
 const getAllClubs = async (req, res) => {
   try {
