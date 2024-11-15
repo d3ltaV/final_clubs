@@ -17,7 +17,7 @@ async function fetchAndProcessCSV(csvURL) {
           const nameOfClub = row['Name of Club '] ? row['Name of Club '].trim() : '';
           const descriptionOfClub = row['Description of Club '] ? row['Description of Club '].trim() : '';
           const meetInfo = row['Club Meeting Time and Location'] ? row['Club Meeting Time and Location'].trim() : '';
-          const publish = row['Publish'] ? row['Publish'].trim() : '';
+          const publish = row['Launched'] ? row['Launched'].trim() : '';
           const names = row['Student Leaders (and contact info)'];
           let cleanNamesOnly = names
             .split(/\s*\S+@\S+\.\S+\s*/) // Split by email pattern
