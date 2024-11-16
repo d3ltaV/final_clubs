@@ -7,7 +7,7 @@ const {fetchAndProcessCSV} = require('./fetch');
 // }
 
 const searchFilter = async (req, res) => {
-    const clubs = await fetchAndProcessCSV(csvURL);
+    const { clubs, clubsRowMapping } = await fetchAndProcessCSV(csvURL);
     try {
         //.filter(word => word.wordLength() > 0)
         const keywords = req.query.keywords.split(' ').map(word => word.toLowerCase());
