@@ -306,7 +306,7 @@ footer::before {
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1420px) {
   .center-section {
     flex-direction: column; 
   }
