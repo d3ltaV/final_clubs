@@ -1,7 +1,7 @@
 //functions that fetch the club informatinos to help display them
 require('dotenv').config({ path: '.env' });
 const { fetchAndProcessCSV } = require('./fetch');
-const csvURL = 'csv_url_here'; //hid for privacy reasons; this is not real project repo
+const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSDnX_41zq0zQN25XLu18Bi7UNVbDM2WfAu5RhFxYdiOL4i_tAW6erRWFy14rIH3R42wlE9RfFSnuG7/pub?gid=2107835340&single=true&output=csv';
 
 const getAllClubs = async (req, res) => {
   try {
