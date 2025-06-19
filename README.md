@@ -2,6 +2,8 @@
 
 Welcome to the **NMH Clubs Database**! This platform provides information about the various clubs at NMH. You can search for clubs via keyword(s) or explore the clubs categorized by their type.
 
+https://studentclubs.nmhschool.org/
+
 ---
 
 ## Project Structure
