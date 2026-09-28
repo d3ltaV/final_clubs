@@ -1,0 +1,538 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* shadcn/ui HSL tokens — tuned to NMH Navigator's palette
+           (pale lavender-cream base, deep navy primary, dusty-rose accent). */
+        --background: 260 30% 96%;
+        --foreground: 240 15% 14%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 240 15% 14%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 15% 14%;
+
+        --primary: 220 55% 23%;              /* --navy #1a2f5c */
+        --primary-foreground: 260 30% 96%;
+
+        --secondary: 240 10% 92%;
+        --secondary-foreground: 240 15% 14%;
+
+        --muted: 240 10% 92%;
+        --muted-foreground: 240 8% 40%;
+
+        --accent: 219 55% 87%;               /* --sky #cddaef */
+        --accent-foreground: 220 55% 23%;
+
+        --destructive: 342 60% 30%;          /* --crimson #7a1e38 */
+        --destructive-foreground: 260 30% 96%;
+
+        --border: 240 10% 82%;
+        --input: 240 10% 82%;
+        --ring: 219 55% 75%;                 /* soft sky ring */
+
+        /* Sharp corners — NMH aesthetic */
+        --radius: 0px;
+    }
+
+    * {
+        @apply border-border;
+    }
+    html, body {
+        @apply text-foreground font-sans antialiased;
+        background: transparent;
+        font-feature-settings: 'rlig' 1, 'calt' 1;
+    }
+    ::selection {
+        background: hsl(var(--accent));
+        color: hsl(var(--foreground));
+    }
+}
+
+/* ---------- Painterly NMH scene background ---------- */
+:root {
+    --px: 0;
+    --py: 0;
+    --scroll-t: 0;
+}
+
+.scene-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.scene-bg__art {
+    position: absolute;
+    inset: 0;
+    /* Cool twilight fill for the night default; warms into sunrise at the bottom. */
+    background: linear-gradient(180deg, #3a3350 0%, #6a5c58 40%, #eabca8 80%, #f6d1c0 100%);
+    animation: scene-pan 60s ease-in-out infinite alternate;
+}
+
+.scene-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 72%;
+    will-change: opacity, transform;
+    transition: opacity 0.2s linear, transform 0.2s linear;
+}
+
+.scene-layer--sunset { z-index: 1; }
+.scene-layer--night  { z-index: 2; opacity: calc(1 - var(--scroll-t)); }
+.scene-layer--sun {
+    z-index: 3;
+    /* Rises from below the viewport as user scrolls. Opacity is deliberately
+       delayed so the sun only fades in once it's cleared the mountain ridge. */
+    transform: translateY(calc((1 - var(--scroll-t)) * 55vh));
+    opacity: calc(var(--scroll-t) * 2.4 - 1.2);
+}
+.scene-layer--stars {
+    z-index: 4;
+    opacity: calc((1 - var(--scroll-t)) * 0.95);
+    transform: translateY(calc(var(--scroll-t) * 12vh));
+}
+.scene-layer--moon {
+    z-index: 5;
+    opacity: calc(1 - var(--scroll-t));
+    transform: translateY(calc(var(--scroll-t) * 8vh));
+}
+
+.scene-bg__haze {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+        rgba(232, 220, 240, 0.04) 0%,
+        rgba(244, 236, 250, 0.35) 32%,
+        rgba(244, 236, 250, 0.35) 68%,
+        rgba(232, 220, 240, 0.04) 100%);
+}
+
+@keyframes scene-pan {
+    from { transform: translate3d(0, 0, 0) scale(1.03); }
+    to   { transform: translate3d(-2%, 1%, 0) scale(1.06); }
+}
+
+/* ---------- Falling cherry blossom petals ---------- */
+.scene-leaves {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+}
+
+.leaf {
+    position: absolute;
+    top: -40px;
+    width: 22px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0;
+    /* Petals hold their washed-out day tint at both night and day, with a
+       soft white halo that reads consistently against either sky. */
+    filter:
+        saturate(0.32)
+        brightness(1.22)
+        drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+    animation:
+        leaf-fall var(--fall-dur, 18s) linear var(--fall-delay, 0s) infinite,
+        leaf-sway var(--sway-dur, 4s) ease-in-out var(--sway-delay, 0s) infinite alternate;
+    will-change: transform, opacity;
+}
+
+.leaf--1 { left: 6%; --fall-dur: 16s; --fall-delay: -2s; --sway-dur: 3.6s; --sway-shift: 34px; width: 22px; height: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 40 40'%3E%3Cg fill='%23f9c1cf'%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(72 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(144 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(216 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(288 20 20)'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='2.5' fill='%23b0637a'/%3E%3C/svg%3E"); }
+.leaf--2 { left: 18%; --fall-dur: 21s; --fall-delay: -6s; --sway-dur: 4.2s; --sway-shift: 26px; width: 18px; height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 40 40'%3E%3Cg fill='%23f9c1cf'%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(72 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(144 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(216 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(288 20 20)'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='2.5' fill='%23b0637a'/%3E%3C/svg%3E"); }
+.leaf--4 { left: 46%; --fall-dur: 24s; --fall-delay: -4s; --sway-dur: 5s; --sway-shift: 22px; width: 20px; height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 40 40'%3E%3Cg fill='%23f9c1cf'%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(72 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(144 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(216 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(288 20 20)'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='2.5' fill='%23b0637a'/%3E%3C/svg%3E"); }
+.leaf--6 { left: 68%; --fall-dur: 22s; --fall-delay: -8s; --sway-dur: 4.6s; --sway-shift: 28px; width: 22px; height: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 40 40'%3E%3Cg fill='%23f9c1cf'%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(72 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(144 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(216 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(288 20 20)'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='2.5' fill='%23b0637a'/%3E%3C/svg%3E"); }
+.leaf--8 { left: 88%; --fall-dur: 23s; --fall-delay: -3s; --sway-dur: 4.4s; --sway-shift: 24px; width: 20px; height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 40 40'%3E%3Cg fill='%23f9c1cf'%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(72 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(144 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(216 20 20)'/%3E%3Cellipse cx='20' cy='9' rx='6.5' ry='10.5' transform='rotate(288 20 20)'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='2.5' fill='%23b0637a'/%3E%3C/svg%3E"); }
+
+@keyframes leaf-fall {
+    0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    8%   { opacity: 0.95; }
+    92%  { opacity: 0.95; }
+    100% { transform: translate(0, 108vh) rotate(540deg); opacity: 0; }
+}
+
+@keyframes leaf-sway {
+    from { margin-left: calc(var(--sway-shift, 30px) * -0.5); }
+    to   { margin-left: calc(var(--sway-shift, 30px) *  0.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .leaf { display: none; }
+    .scene-bg__art { animation: none; }
+}
+
+/* Header uses the sky as background — cool twilight at rest, warms into sunrise. */
+.header-bg {
+    background: linear-gradient(180deg,
+        color-mix(in srgb,
+            rgba(190, 178, 220, 0.6),
+            rgba(240, 200, 195, 0.55) calc(var(--scroll-t) * 100%)),
+        color-mix(in srgb,
+            rgba(210, 195, 225, 0.5),
+            rgba(220, 195, 205, 0.45) calc(var(--scroll-t) * 100%))
+    );
+    backdrop-filter: blur(14px) saturate(1.1);
+    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+}
+
+/* Utility — hide scrollbar on the mobile nav rail. */
+.no-scrollbar {
+    scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Painterly hero title — sizing matches the Flask hero. */
+.hero-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin: 22px 0 40px;
+    color: hsl(var(--foreground));
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+}
+
+.hero-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #1a2f5c;
+    border-radius: 50%;
+}
+
+/* Feature index — 4-column tic-tac-toe grid with hairline internal borders.
+   Outer edges are stripped; only the inner # of borders shows. */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+.features-grid > .feature-card {
+    display: block;
+    padding: 24px 22px 28px;
+    background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    border-right: 1px solid rgba(27, 26, 43, 0.22);
+    border-bottom: 1px solid rgba(27, 26, 43, 0.22);
+    transition: background 0.25s ease, color 0.15s ease;
+}
+.features-grid > .feature-card:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+.features-grid > .feature-card:hover h3 {
+    color: #1a2f5c;
+}
+.features-grid > .feature-card:nth-child(4n) { border-right: none; }
+.features-grid > .feature-card:nth-last-child(-n+2):nth-child(4n+1),
+.features-grid > .feature-card:nth-last-child(-n+2):nth-child(4n+2),
+.features-grid > .feature-card:nth-last-child(-n+1) { border-bottom: none; }
+
+@media (max-width: 900px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-grid > .feature-card:nth-child(2n) { border-right: none; }
+    .features-grid > .feature-card:nth-child(4n) { border-right: 1px solid rgba(27, 26, 43, 0.22); }
+    .features-grid > .feature-card:nth-last-child(-n+2) { border-bottom: none; }
+}
+@media (max-width: 520px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .features-grid > .feature-card { border-right: none !important; }
+}
+
+.feature-card__num {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.7);
+    color: #1a2f5c;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+}
+.feature-card h3 {
+    margin: 10px 0 8px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: hsl(var(--foreground));
+    transition: color 0.15s ease;
+}
+.feature-card p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: hsl(var(--muted-foreground));
+    line-height: 1.55;
+}
+
+/* Directory / catalog page frosted header block. */
+.dir-header {
+    padding: 32px;
+    margin: 0 0 24px;
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(10px) saturate(1.08);
+    -webkit-backdrop-filter: blur(10px) saturate(1.08);
+    z-index: 20;
+    position: relative;
+}
+.dir-header h1 {
+    font-size: clamp(1.7rem, 3.2vw, 2.2rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: hsl(var(--foreground));
+    margin: 0 0 18px;
+}
+
+/* Frosted catalog card. */
+.dir-card {
+    display: flex;
+    flex-direction: column;
+    padding: 22px 20px 20px;
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(6px) saturate(1.05);
+    -webkit-backdrop-filter: blur(6px) saturate(1.05);
+    transition: background 0.25s ease;
+}
+.dir-card:hover { background: rgba(255, 255, 255, 0.82); }
+
+.dir-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 16px;
+}
+
+/* Hero buttons — ported straight from the Flask .btn / .btn--ghost so hover
+   behavior (frosted-white on blur, dark ink text) matches exactly. */
+.btn {
+    display: inline-block;
+    padding: 13px 25px;
+    border: 1px solid transparent;
+    background: #1a2f5c;
+    color: #ffffff;
+    font: 500 0.95rem 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px) saturate(1.05);
+    -webkit-backdrop-filter: blur(14px) saturate(1.05);
+    color: hsl(var(--foreground));
+    border-color: transparent;
+}
+.btn--ghost {
+    padding: 12px 24px;
+    background: transparent;
+    color: hsl(var(--foreground));
+    border: 1px solid #1a2f5c;
+}
+.btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px) saturate(1.05);
+    -webkit-backdrop-filter: blur(14px) saturate(1.05);
+    color: hsl(var(--foreground));
+    border-color: #1a2f5c;
+}
+
+/* ---------- View toggle + compact list ---------- */
+.view-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.7);
+}
+.view-toggle button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: hsl(var(--muted-foreground));
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+.view-toggle button svg { width: 16px; height: 16px; stroke-width: 2; }
+.view-toggle button:hover { color: #1a2f5c; }
+.view-toggle button[aria-pressed="true"] { background: #1a2f5c; color: #f4f2f8; }
+
+.results-info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.dir-list {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(6px) saturate(1.05);
+    -webkit-backdrop-filter: blur(6px) saturate(1.05);
+}
+.dir-list-item {
+    border-bottom: 1px solid rgba(27, 26, 43, 0.1);
+}
+.dir-list-item:last-child { border-bottom: none; }
+
+.dir-list-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+.dir-list-row:hover { background: rgba(255, 255, 255, 0.55); }
+
+/* Expanded item — row + detail together read as one solid-white block. */
+.dir-list-row[aria-expanded="true"] {
+    background: rgba(255, 255, 255, 0.9);
+}
+.dir-list-row[aria-expanded="true"] + .dir-list-detail {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.dir-list-title {
+    flex: 1;
+    min-width: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.98rem;
+    color: hsl(var(--foreground));
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dir-list-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: hsl(var(--muted-foreground));
+}
+
+/* Locked pill — same visual regardless of context. Matches the home feature
+   number pill: no border, translucent white block, navy text. */
+.pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.7);
+    color: #1a2f5c;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Sliding arrow indicator on directory rows — mirrors the map popup arrows. */
+.dir-list-arrow {
+    color: rgba(15, 23, 42, 0.25);
+    font-size: 1rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.15s ease, transform 0.18s ease;
+}
+.dir-list-row:hover .dir-list-arrow {
+    color: #1a2f5c;
+    transform: translateX(2px);
+}
+.dir-list-row[aria-expanded="true"] .dir-list-arrow {
+    color: #1a2f5c;
+    transform: rotate(90deg);
+}
+
+.dir-list-detail {
+    padding: 4px 18px 16px 18px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Rectangular map pins — used by CampusMap for AdvancedMarkerElement content. */
+.rect-pin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    background: #1a2f5c;
+    color: #f4f2f8;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    transition: background 0.18s ease, color 0.18s ease, backdrop-filter 0.18s ease;
+    animation: pin-drop 0.5s ease-out backwards;
+}
+.rect-pin:hover {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px) saturate(1.05);
+    -webkit-backdrop-filter: blur(14px) saturate(1.05);
+    color: #1a2f5c;
+}
+@keyframes pin-drop {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Byline pinned at the bottom of the viewport. */
+.byline {
+    position: fixed;
+    left: 0; right: 0; bottom: 8px;
+    z-index: 50;
+    text-align: center;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    text-transform: lowercase;
+}
