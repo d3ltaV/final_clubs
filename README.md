@@ -32,9 +32,11 @@ App runs at http://localhost:3000.
 
 ## Rebuilding the frontend
 
-Only needed after editing `frontend/src/*`:
+Flask serves the compiled bundle at `frontend/dist/`, not the raw React source. So any edit under `frontend/src/` won't appear on the site until you rebuild:
 
 ```bash
-npm --prefix frontend install
-npm --prefix frontend run build
+npm --prefix frontend install    # first time only
+npm --prefix frontend run build  # regenerates frontend/dist/
 ```
+
+Commit the new `frontend/dist/` along with your source changes so the host doesn't need Node.
