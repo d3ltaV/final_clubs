@@ -4,31 +4,18 @@ import os
 
 class WorkJobList:
 
-    def __init__(self, name, location, supervisor, supervisor_email,
-                 spots, blocks, selected_or_assigned, description, notes):
+    def __init__(self, name, location, description):
         self.name = name
         self.location = location
-        self.supervisor = supervisor
-        self.supervisor_email = supervisor_email
-        self.spots = spots
-        self.blocks = blocks
-        self.selected_or_assigned = selected_or_assigned
         self.description = description
-        self.notes = notes
 
     def to_dict(self):
         return {
             "name": self.name,
             "location": self.location,
-            "supervisor": self.supervisor,
-            "supervisor_email": self.supervisor_email,
-            "spots": self.spots,
-            "blocks": self.blocks,
-            "selected_or_assigned": self.selected_or_assigned,
             "description": self.description,
-            "notes": self.notes
         }
-    
+
     @classmethod
     def getTable(cls):
         load_dotenv()
@@ -36,23 +23,34 @@ class WorkJobList:
         table = pd.read_csv(docs)
         return table
 
+    LOCATION_ALIASES = {
+        "health center": "O'Connor Health Center",
+        "o'connor health center": "O'Connor Health Center",
+        "oconnor health center": "O'Connor Health Center",
+    }
+
+    @classmethod
+    def normalizeLocation(cls, loc):
+        if loc is None:
+            return None
+        key = str(loc).strip().lower()
+        return cls.LOCATION_ALIASES.get(key, str(loc).strip())
+
     @classmethod
     def getWorkjobs(cls):
         table = cls.getTable()
         workjobs = []
         for i, r in table.iterrows():
+            def get(col):
+                return r[col] if col in table.columns and pd.notna(r[col]) else None
+            occurring = get("Occuring") or get("Occurring")
+            if str(occurring).strip().lower() != "yes":
+                continue
             job = cls(
-                name=r["Workjob Name"] if pd.notna(r["Workjob Name"]) else None,
-                location=r["Location"] if pd.notna(r["Location"]) else None,
-                supervisor=r["Supervisor"] if pd.notna(r["Supervisor"]) else None,
-                supervisor_email=r["Supervisor Email"] if pd.notna(r["Supervisor Email"]) else None,
-                spots=r["Spots"] if pd.notna(r["Spots"]) else None,
-                blocks=r["Blocks (if availiable)"] if pd.notna(r["Blocks (if availiable)"]) else None,
-                selected_or_assigned=r["Selected/Assigned"] if pd.notna(r["Selected/Assigned"]) else None,
-                description=r["Description"] if pd.notna(r["Description"]) else None,
-                notes=r["Notes"] if pd.notna(r["Notes"]) else None
+                name=get("Workjob Name"),
+                location=cls.normalizeLocation(get("Location")),
+                description=get("Description"),
             )
-
             workjobs.append(job)
 
         return workjobs
