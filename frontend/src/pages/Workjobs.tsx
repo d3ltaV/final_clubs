@@ -109,21 +109,23 @@ export default function Workjobs() {
                 <div className="dir-list">
                     {rows.map((j, i) => {
                         const isOpen = expanded === i
+                        const hasDetail = Boolean(j.description || j.notes)
                         return (
                             <div key={(j.name || '') + i} className="dir-list-item">
                                 <button
                                     type="button"
                                     className="dir-list-row"
-                                    aria-expanded={isOpen}
-                                    onClick={() => setExpanded(isOpen ? null : i)}
+                                    aria-expanded={hasDetail ? isOpen : undefined}
+                                    disabled={!hasDetail}
+                                    onClick={hasDetail ? () => setExpanded(isOpen ? null : i) : undefined}
                                 >
                                     <span className="dir-list-title">{j.name || 'Untitled Position'}</span>
                                     <span className="dir-list-meta">
                                         {j.location && <span className="pill">{j.location}</span>}
                                     </span>
-                                    <span className="dir-list-arrow" aria-hidden>→</span>
+                                    {hasDetail && <span className="dir-list-arrow" aria-hidden>→</span>}
                                 </button>
-                                {isOpen && (
+                                {isOpen && hasDetail && (
                                     <div className="dir-list-detail">
                                         {j.description && (
                                             <div className="mt-1 border-t border-black/15 pt-2.5 text-[0.9rem] leading-relaxed text-muted-foreground">

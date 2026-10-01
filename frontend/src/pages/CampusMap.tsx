@@ -156,6 +156,17 @@ export default function CampusMap() {
                                     <div className="mt-4 flex flex-col">
                                         {popup.jobs.map((j, idx) => {
                                             const active = detail?.job.name === j.name
+                                            const hasDetail = Boolean(j.description || j.notes)
+                                            if (!hasDetail) {
+                                                return (
+                                                    <div
+                                                        key={idx}
+                                                        className="flex items-center justify-between border-t border-black/5 py-2.5 text-left text-[0.95rem] font-medium text-foreground first:border-t-0"
+                                                    >
+                                                        <span>{j.name ?? 'Unnamed Workjob'}</span>
+                                                    </div>
+                                                )
+                                            }
                                             return (
                                                 <button
                                                     key={idx}
