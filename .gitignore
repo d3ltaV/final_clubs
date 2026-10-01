@@ -1,4 +1,6 @@
 .env
+.env.*
+*.env
 sqlite_db
 
 # Node (React frontend) — frontend/dist/ IS committed so deploys don't need Node
