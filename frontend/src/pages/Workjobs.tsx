@@ -1,10 +1,21 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ViewToggle, useViewMode } from '@/components/ViewToggle'
 import { RichText } from '@/components/RichText'
+
+type SortKey = 'name' | 'location'
 
 type WorkjobRow = {
     name: string | null
@@ -26,7 +37,18 @@ export default function Workjobs() {
     const [debouncedQuery, setDebouncedQuery] = useState('')
     const [view, setView] = useViewMode('workjobsView')
     const [expanded, setExpanded] = useState<number | null>(null)
+    const [sort, setSort] = useState<SortKey>('name')
+    const [descending, setDescending] = useState(false)
     const hasFetchedOnce = useRef(false)
+
+    const sorted = useMemo(() => {
+        const list = [...rows].sort((a, b) => {
+            if (sort === 'name') return (a.name || '').localeCompare(b.name || '')
+            return (a.location || '').localeCompare(b.location || '')
+        })
+        if (descending) list.reverse()
+        return list
+    }, [rows, sort, descending])
 
     // First load — total count baseline.
     useEffect(() => {
@@ -85,13 +107,33 @@ export default function Workjobs() {
                     />
                 </div>
 
+                <div className="flex flex-wrap items-center gap-2">
+                    <ChipSelect
+                        label="Sort"
+                        value={sort}
+                        onChange={(v) => setSort(v as SortKey)}
+                        options={[
+                            { value: 'name', label: 'Workjob Name' },
+                            { value: 'location', label: 'Workjob Location' },
+                        ]}
+                    />
+                    <label className="ml-1 flex cursor-pointer items-center gap-2 text-sm text-muted-foreground">
+                        <Checkbox
+                            checked={descending}
+                            onCheckedChange={(v) => setDescending(v === true)}
+                            className="rounded-none border-black/40 data-[state=checked]:bg-navy data-[state=checked]:border-navy"
+                        />
+                        Descending
+                    </label>
+                </div>
+
                 <div className="results-info-row">
                     <p className="text-[0.88rem] font-normal text-muted-foreground">
                         {loading
                             ? 'Loading workjobs...'
-                            : rows.length === total
+                            : sorted.length === total
                             ? 'Showing all workjobs!'
-                            : `Showing ${rows.length} of ${total} workjob${total !== 1 ? 's' : ''}`}
+                            : `Showing ${sorted.length} of ${total} workjob${total !== 1 ? 's' : ''}`}
                     </p>
                     <ViewToggle mode={view} onChange={setView} />
                 </div>
@@ -107,7 +149,7 @@ export default function Workjobs() {
 
             {view === 'list' ? (
                 <div className="dir-list">
-                    {rows.map((j, i) => {
+                    {sorted.map((j, i) => {
                         const isOpen = expanded === i
                         const hasDetail = Boolean(j.description || j.notes)
                         return (
@@ -152,7 +194,7 @@ export default function Workjobs() {
                         <Skeleton key={i} className="h-56 w-full rounded-none" />
                     ))}
                 {(!loading || hasFetchedOnce.current) &&
-                    rows.map((j, i) => (
+                    sorted.map((j, i) => (
                         <motion.div
                             key={(j.name || '') + i}
                             initial={hasFetchedOnce.current ? false : { opacity: 0, y: 8 }}
@@ -186,7 +228,7 @@ export default function Workjobs() {
             </div>
             )}
 
-            {!loading && rows.length === 0 && (
+            {!loading && sorted.length === 0 && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -197,5 +239,36 @@ export default function Workjobs() {
                 </motion.div>
             )}
         </div>
+    )
+}
+
+function ChipSelect({
+    label,
+    value,
+    onChange,
+    options,
+}: {
+    label: string
+    value: string
+    onChange: (v: string) => void
+    options: { value: string; label: string }[]
+}) {
+    return (
+        <Select value={value} onValueChange={onChange}>
+            <SelectTrigger className="h-9 w-auto min-w-0 gap-2 rounded-none border-navy/25 bg-white/72 px-3 text-[0.85rem] font-medium text-navy focus:ring-0 focus-visible:ring-2 focus-visible:ring-sky/40 [&>span:last-child]:hidden">
+                <span className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    {label}
+                </span>
+                <Separator orientation="vertical" className="h-4 bg-navy/20" />
+                <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="rounded-none border-black/18 bg-white/92 backdrop-blur-xl">
+                {options.map((o) => (
+                    <SelectItem key={o.value} value={o.value} className="rounded-none">
+                        {o.label}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
     )
 }
