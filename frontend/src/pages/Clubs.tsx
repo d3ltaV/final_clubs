@@ -168,6 +168,16 @@ export default function Clubs() {
                                                 {desc}
                                             </div>
                                         )}
+                                        <div className="mt-2.5 text-[0.85rem]">
+                                            <a
+                                                href="https://docs.google.com/spreadsheets/d/1nJTH-l3URAc8BY6s6I9_aqDjWDCJVQE4Z64fbuP79Kw/edit?gid=2107835340#gid=2107835340"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="font-normal text-navy underline underline-offset-2 hover:text-crimson"
+                                            >
+                                                Click here for contact information
+                                            </a>
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -225,6 +235,17 @@ export default function Clubs() {
                                             </div>
                                         </>
                                     )}
+
+                                    <div className="mt-3 text-[0.85rem]">
+                                        <a
+                                            href="https://docs.google.com/spreadsheets/d/1nJTH-l3URAc8BY6s6I9_aqDjWDCJVQE4Z64fbuP79Kw/edit?gid=2107835340#gid=2107835340"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="font-normal text-navy underline underline-offset-2 hover:text-crimson"
+                                        >
+                                            Click here for contact information
+                                        </a>
+                                    </div>
                             </motion.div>
                         )
                     })}
