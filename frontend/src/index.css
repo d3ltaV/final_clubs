@@ -248,7 +248,6 @@
     color: hsl(var(--foreground));
     text-decoration: none;
     border-right: 1px solid rgba(27, 26, 43, 0.22);
-    border-bottom: 1px solid rgba(27, 26, 43, 0.22);
     transition: background 0.25s ease, color 0.15s ease;
 }
 .features-grid > .feature-card:hover {

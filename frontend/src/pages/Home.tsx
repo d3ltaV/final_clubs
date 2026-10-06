@@ -8,9 +8,9 @@ const MotionLink = motion(Link)
 
 // Classes + Cocurriculars are hidden until their data feeds are ready.
 const features = [
-    { num: '01', title: 'Campus map', body: 'Click any building to see the workjobs based there.', to: '/map' },
-    { num: '02', title: 'Workjobs', body: 'Every job, supervisor, block and open spot.', to: '/workjobs' },
-    { num: '03', title: 'Clubs', body: 'Every student club, meeting time and description.', to: '/clubs' },
+    { num: '01', title: 'Clubs', body: 'Every student club, meeting time and description.', to: '/clubs' },
+    { num: '02', title: 'Campus map', body: 'Click any building to see the workjobs based there.', to: '/map' },
+    { num: '03', title: 'Workjobs', body: 'Every job, supervisor, block and open spot.', to: '/workjobs' },
     { num: '04', title: 'Resources', body: 'Official NMH links, including Hogger News.', to: '/resources' },
     // { num: 'XX', title: 'Classes', body: 'Search, filter by subject and sort the whole catalog.', to: '/classes' },
     // { num: 'XX', title: 'Cocurriculars', body: 'PEs and seasonal activities by category.', to: '/cocurriculars' },
@@ -134,7 +134,7 @@ export default function Home() {
                         margin: '0 0 16px 0',
                     }}
                 >
-                    NMH Navigator
+                    Hogger News Navigator
                 </motion.p>
 
                 <div className="features-grid">

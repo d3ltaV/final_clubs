@@ -50,12 +50,6 @@ const SECTIONS: { title: string; links: Link[] }[] = [
                     "News for students, by students. Check out everything that's happening on campus weekly at Hogger News!",
             },
             {
-                href: 'https://aibot.nmhschool.org/',
-                title: 'NMH AI Bot',
-                description:
-                    "NMH's AI chatbot for faculty and staff. Includes HoggerBot, Solver (for math/logic), and NMH-Optimized (trained on handbooks).",
-            },
-            {
                 href: 'https://www.flickr.com/photos/nmhphotos/albums/',
                 title: 'NMH Flickr',
                 description: 'See the NMH photo album!',

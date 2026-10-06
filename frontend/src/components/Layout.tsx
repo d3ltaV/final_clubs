@@ -5,11 +5,11 @@ import { FallingPetals } from '@/components/FallingPetals'
 
 const nav = [
     { to: '/', label: 'Home' },
+    { to: '/clubs', label: 'Clubs' },
     { to: '/map', label: 'Campus Map' },
     // { to: '/classes', label: 'Classes' },        // Data not ready — hidden for now.
     { to: '/workjobs', label: 'Workjobs' },
     // { to: '/cocurriculars', label: 'Cocurriculars' },  // Data not ready — hidden for now.
-    { to: '/clubs', label: 'Clubs' },
     { to: '/resources', label: 'Resources' },
 ]
 
@@ -31,7 +31,7 @@ export function Layout() {
                 <NavLink to="/" className="flex items-center gap-2.5 shrink-0 no-underline">
                     <img src="/static/images/pig.png" alt="" className="h-11 w-auto" />
                     <span className="text-[1.1rem] font-semibold tracking-tight text-navy">
-                        NMH Navigator
+                        Hogger News Navigator
                     </span>
                 </NavLink>
                 <nav className="ml-auto flex items-center gap-1 overflow-x-auto no-scrollbar">
@@ -62,7 +62,7 @@ export function Layout() {
             </main>
 
             <footer aria-hidden className="byline">
-                built by joelle '27 &amp; lorcan '26 <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.75rem' }}>&lt;3</span>
+                built by joelle '27, lorcan '26, and Hogger News staff <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.75rem' }}>&lt;3</span>
             </footer>
         </div>
     )
