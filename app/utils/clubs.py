@@ -1,6 +1,12 @@
+import os
+import time
+
 import pandas as pd
 from dotenv import load_dotenv
-import os
+
+
+_TTL_SECONDS = 30 * 60
+_cache = {"data": None, "ts": 0.0}
 
 
 class ClubList:
@@ -23,7 +29,7 @@ class ClubList:
 
     @classmethod
     def getTable(cls):
-        load_dotenv()
+        load_dotenv(override=True)
         docs = os.getenv('CLUBS_URL')
         table = pd.read_csv(docs)
         table.columns = table.columns.str.strip()
@@ -34,19 +40,26 @@ class ClubList:
         table = cls.getTable()
         clubs = []
         for i, r in table.iterrows():
-            if r["Name of Club"] == "Name of Club" or r["Description of Club"] == "Description of Club":
+            def col(name):
+                return r[name] if name in table.columns and pd.notna(r[name]) else None
+            name_val = col("Name of Club")
+            desc_val = col("Description of Club")
+            if name_val == "Name of Club" or desc_val == "Description of Club":
+                continue
+            if not name_val:
                 continue
             class_obj = cls(
-                name=r["Name of Club"] if pd.notna(r["Name of Club"]) else None,
-                desc=r["Description of Club"] if pd.notna(r["Description of Club"]) else None,
-                meeting=r["Club Meeting Time and Location"] if pd.notna(r["Club Meeting Time and Location"]) else None,
-                type=r["Type of Club"] if pd.notna(r["Type of Club"]) else None,
-                publish=r["Publish"] if pd.notna(r["Publish"]) else None,
+                name=name_val,
+                desc=desc_val,
+                meeting=col("Club Meeting Time and Location"),
+                type=col("Type of Club"),
+                publish=col("Publish"),
             )
 
             clubs.append(class_obj)
 
         return clubs
+
     @classmethod
     def printClubs(cls):
         co = ClubList.getClubs()
@@ -54,4 +67,13 @@ class ClubList:
             print(c.to_dict())
 
 
-CLUBS = ClubList.getClubs()
+def get_clubs():
+    now = time.time()
+    if _cache["data"] is None or now - _cache["ts"] > _TTL_SECONDS:
+        try:
+            _cache["data"] = ClubList.getClubs()
+            _cache["ts"] = now
+        except Exception:
+            if _cache["data"] is None:
+                raise
+    return _cache["data"]

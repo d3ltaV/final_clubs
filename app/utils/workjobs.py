@@ -1,6 +1,13 @@
+import os
+import time
+
 import pandas as pd
 from dotenv import load_dotenv
-import os
+
+
+_TTL_SECONDS = 30 * 60
+_cache = {"data": None, "ts": 0.0}
+
 
 class WorkJobList:
 
@@ -18,7 +25,7 @@ class WorkJobList:
 
     @classmethod
     def getTable(cls):
-        load_dotenv()
+        load_dotenv(override=True)
         docs = os.getenv('WORKJOB_URL')
         table = pd.read_csv(docs)
         return table
@@ -76,5 +83,14 @@ class WorkJobList:
                 print(job.to_dict())
 
 
-wj = WorkJobList.getWorkjobs()
-WORKJOBS = WorkJobList.sortByLocation(wj)
+def get_workjobs():
+    now = time.time()
+    if _cache["data"] is None or now - _cache["ts"] > _TTL_SECONDS:
+        try:
+            fresh = WorkJobList.getWorkjobs()
+            _cache["data"] = WorkJobList.sortByLocation(fresh)
+            _cache["ts"] = now
+        except Exception:
+            if _cache["data"] is None:
+                raise
+    return _cache["data"]

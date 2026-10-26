@@ -3,10 +3,10 @@ from flask import Flask, request, jsonify, send_from_directory, abort
 from dotenv import load_dotenv
 
 load_dotenv()
-from utils.workjobs import WORKJOBS
+from utils.workjobs import get_workjobs
 from utils.classes import CLASSES
 from utils.cocurriculars import COCURRICULARS
-from utils.clubs import CLUBS
+from utils.clubs import get_clubs
 
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -30,7 +30,7 @@ def api_config():
 @app.route("/api/workjobs/<location>")
 def api_workjobs(location):
     loc = location.lower().strip()
-    for key, jobs in WORKJOBS.items():
+    for key, jobs in get_workjobs().items():
         if key.lower().strip() == loc:
             return jsonify([job.to_dict() for job in jobs])
     return jsonify({"error": "No workjobs found"}), 404
@@ -42,7 +42,7 @@ def api_search():
     search_type = request.args.get("s", "").lower().strip()
 
     if search_type == "workjobs":
-        all_jobs = [j.to_dict() for jobs in WORKJOBS.values() for j in jobs]
+        all_jobs = [j.to_dict() for jobs in get_workjobs().values() for j in jobs]
         if not query:
             return jsonify(all_jobs)
         return jsonify([
@@ -61,7 +61,7 @@ def api_search():
         ])
 
     if search_type == "clubs":
-        rows = [c.to_dict() for c in CLUBS]
+        rows = [c.to_dict() for c in get_clubs()]
         if not query:
             return jsonify(rows)
         return jsonify([
