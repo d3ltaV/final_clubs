@@ -28,6 +28,12 @@ const SECTIONS: { title: string; links: Link[] }[] = [
                 title: 'NMH Course Curriculum Guide',
                 description: 'Official NMH information on all courses offered.',
             },
+            {
+                href: 'https://groot.nmhschool.org/Opportunities/',
+                title: 'Opportunities Beyond Campus',
+                description:
+                    'Pre-college courses, scholarships, leadership programs, contests and competitions, community service opportunities, and more, curated by the NMH College Counseling team.',
+            },
         ],
     },
     {
