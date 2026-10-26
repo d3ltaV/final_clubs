@@ -26,14 +26,13 @@ const HERO_LINES: { words: { text: string; accent?: boolean }[] }[] = [
 export default function Home() {
     return (
         <div>
-            {/* Hero — grid-cols 1.1fr 1fr, max-width 1180, clamp padding. */}
+            {/* Hero — stacks on mobile; 2 columns from md up. */}
             <section
-                className="mx-auto grid items-center"
+                className="hero-section mx-auto grid items-center"
                 style={{
-                    gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)',
                     gap: 'clamp(28px, 5vw, 88px)',
                     maxWidth: 1180,
-                    padding: 'clamp(28px, 5vh, 72px) clamp(20px, 4vw, 48px) 40px',
+                    padding: 'clamp(24px, 5vh, 72px) clamp(16px, 4vw, 48px) 40px',
                 }}
             >
                 <div>
@@ -55,7 +54,11 @@ export default function Home() {
                                     {line.words.map((word, wi) => (
                                         <span
                                             key={wi}
-                                            style={{ color: word.accent ? '#7a1e38' : undefined }}
+                                            className="inline-block"
+                                            style={{
+                                                color: word.accent ? '#7a1e38' : undefined,
+                                                whiteSpace: 'pre',
+                                            }}
                                         >
                                             {Array.from(word.text).map((ch) => {
                                                 const idx = charIndex++
@@ -98,7 +101,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 22 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 0.25 }}
-                    className="relative flex items-center justify-center"
+                    className="hero-pig relative hidden items-center justify-center md:flex"
                     style={{ minHeight: 360, maxHeight: 440 }}
                 >
                     <img
@@ -134,7 +137,7 @@ export default function Home() {
                         margin: '0 0 16px 0',
                     }}
                 >
-                    Hogger News Navigator
+                    Hogger News Wayfinder
                 </motion.p>
 
                 <div className="features-grid">

@@ -54,6 +54,11 @@ export default function CampusMap() {
 
     useLayoutEffect(() => {
         if (!detail || !cardRef.current) return
+        // On narrow screens the card is centered as a bottom sheet; skip the anchor math.
+        if (window.innerWidth < 768) {
+            setPos({ top: 0, triangleTop: 0 })
+            return
+        }
         const height = cardRef.current.offsetHeight
         const idealTop = detail.anchorY - 26
         const maxTop = window.innerHeight - height - 20
@@ -234,8 +239,10 @@ export default function CampusMap() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0 }}
                         transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed z-[60] w-[280px] bg-white/75 backdrop-blur-md backdrop-saturate-[1.08]"
+                        className="map-detail-card fixed z-[60] bg-white/90 backdrop-blur-md backdrop-saturate-[1.08]"
                         style={{
+                            // On wide screens the inline styles (left/top) take over via the
+                            // `md:` reset in CSS; on narrow screens the class pins it to the bottom.
                             left: detail.anchorX + 12,
                             top: pos.top,
                             transformOrigin: `-8px ${pos.triangleTop + 8}px`,
@@ -243,7 +250,7 @@ export default function CampusMap() {
                     >
                         <span
                             aria-hidden
-                            className="pointer-events-none absolute"
+                            className="pointer-events-none absolute hidden md:block"
                             style={{
                                 left: -8,
                                 top: pos.triangleTop,

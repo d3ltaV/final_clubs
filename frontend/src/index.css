@@ -201,15 +201,28 @@
 }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Hero layout — single column on phone, 2-column from md up. */
+.hero-section {
+    grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 768px) {
+    .hero-section {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    }
+}
+
 /* Painterly hero title — sizing matches the Flask hero. */
 .hero-title {
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    font-size: clamp(2.2rem, 9vw, 4.4rem);
     font-weight: 600;
     line-height: 1.05;
     letter-spacing: -0.035em;
-    margin: 22px 0 40px;
+    margin: 18px 0 32px;
     color: hsl(var(--foreground));
+}
+@media (min-width: 640px) {
+    .hero-title { margin: 22px 0 40px; }
 }
 
 .hero-eyebrow {
@@ -298,20 +311,29 @@
 
 /* Directory / catalog page frosted header block. */
 .dir-header {
-    padding: 32px;
-    margin: 0 0 24px;
+    padding: 20px;
+    margin: 0 0 20px;
     background: rgba(255, 255, 255, 0.62);
     backdrop-filter: blur(10px) saturate(1.08);
     -webkit-backdrop-filter: blur(10px) saturate(1.08);
     z-index: 20;
     position: relative;
 }
+@media (min-width: 640px) {
+    .dir-header {
+        padding: 32px;
+        margin: 0 0 24px;
+    }
+}
 .dir-header h1 {
-    font-size: clamp(1.7rem, 3.2vw, 2.2rem);
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
     font-weight: 500;
     letter-spacing: -0.015em;
     color: hsl(var(--foreground));
-    margin: 0 0 18px;
+    margin: 0 0 14px;
+}
+@media (min-width: 640px) {
+    .dir-header h1 { margin: 0 0 18px; }
 }
 
 /* Frosted catalog card. */
@@ -416,13 +438,19 @@
     display: flex;
     width: 100%;
     align-items: center;
-    gap: 14px;
-    padding: 12px 18px;
+    gap: 10px;
+    padding: 12px 14px;
     border: none;
     background: transparent;
     text-align: left;
     cursor: pointer;
     transition: background 0.15s ease;
+}
+@media (min-width: 640px) {
+    .dir-list-row {
+        gap: 14px;
+        padding: 12px 18px;
+    }
 }
 .dir-list-row:hover { background: rgba(255, 255, 255, 0.55); }
 
@@ -470,6 +498,18 @@
     text-transform: uppercase;
     white-space: nowrap;
 }
+/* On phones, long pill text (e.g. "IDENTITY-BASED GROUP (AFFINITY/ALLIANCE
+   GROUP)") would overflow the row. Allow wrapping and cap width inside list
+   rows so the title keeps room. */
+@media (max-width: 639px) {
+    .dir-list-meta .pill {
+        white-space: normal;
+        max-width: 55vw;
+        font-size: 0.58rem;
+        letter-spacing: 0.06em;
+        padding: 3px 7px;
+    }
+}
 
 /* Sliding arrow indicator on directory rows — mirrors the map popup arrows. */
 .dir-list-arrow {
@@ -489,8 +529,32 @@
 }
 
 .dir-list-detail {
-    padding: 4px 18px 16px 18px;
+    padding: 4px 14px 16px 14px;
     background: rgba(255, 255, 255, 0.9);
+}
+@media (min-width: 640px) {
+    .dir-list-detail { padding: 4px 18px 16px 18px; }
+}
+
+/* Map detail popup — on phones it's a pinned bottom card that spans the width
+   and ignores the anchor coords (the inline left/top are overridden). From md
+   up, the inline styles take over and the card anchors next to the sidebar. */
+@media (max-width: 767px) {
+    .map-detail-card {
+        left: 12px !important;
+        right: 12px !important;
+        top: auto !important;
+        bottom: 16px !important;
+        width: auto !important;
+        max-height: 60vh;
+        overflow-y: auto;
+        box-shadow: 0 -8px 24px -8px rgba(0, 0, 0, 0.18);
+    }
+}
+@media (min-width: 768px) {
+    .map-detail-card {
+        width: 280px;
+    }
 }
 
 /* Rectangular map pins — used by CampusMap for AdvancedMarkerElement content. */
@@ -526,12 +590,31 @@
 /* Byline pinned at the bottom of the viewport. */
 .byline {
     position: fixed;
-    left: 0; right: 0; bottom: 8px;
+    left: 0; right: 0; bottom: 6px;
     z-index: 50;
     text-align: center;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     pointer-events: none;
     text-transform: lowercase;
+    padding: 0 12px;
+    line-height: 1.4;
+}
+@media (min-width: 640px) {
+    .byline {
+        bottom: 8px;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+    }
+}
+
+/* The byline is fixed, so reserve room at the bottom of the main region so
+   the last catalog row or feature card isn't hidden under it. */
+main {
+    padding-bottom: 56px;
+}
+@media (min-width: 640px) {
+    main { padding-bottom: 32px; }
 }
