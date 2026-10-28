@@ -8,7 +8,7 @@ const MotionLink = motion(Link)
 
 // Classes + Cocurriculars are hidden until their data feeds are ready.
 const features = [
-    { num: '01', title: 'Clubs', body: 'Student clubs, meeting times, locations, and descriptions.', to: '/clubs' },
+    { num: '01', title: 'Student Groups', body: 'Student groups, meeting times, locations, and descriptions.', to: '/clubs' },
     { num: '02', title: 'Campus map', body: 'Click any building to see the workjobs based there.', to: '/map' },
     { num: '03', title: 'Workjobs', body: 'Student workjobs, locations, and descriptions.', to: '/workjobs' },
     { num: '04', title: 'Resources', body: 'Official NMH links, including Hogger News.', to: '/resources' },
@@ -93,7 +93,7 @@ export default function Home() {
                         className="flex flex-wrap gap-3.5"
                     >
                         <Link to="/map" className="btn">Explore the map</Link>
-                        <Link to="/clubs" className="btn btn--ghost">Browse clubs</Link>
+                        <Link to="/clubs" className="btn btn--ghost">Browse student groups</Link>
                     </motion.div>
                 </div>
 

@@ -8,7 +8,7 @@ import { FallingPetals } from '@/components/FallingPetals'
 
 const nav = [
     { to: '/', label: 'Home' },
-    { to: '/clubs', label: 'Clubs' },
+    { to: '/clubs', label: 'Student Groups' },
     { to: '/map', label: 'Campus Map' },
     // { to: '/classes', label: 'Classes' },        // Data not ready — hidden for now.
     { to: '/workjobs', label: 'Workjobs' },

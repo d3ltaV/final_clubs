@@ -82,7 +82,7 @@ export default function Clubs() {
                 transition={{ duration: 0.5 }}
                 className="dir-header"
             >
-                <h1>Clubs Directory</h1>
+                <h1>Student Groups Directory</h1>
 
                 <div className="relative mb-3">
                     <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -90,7 +90,7 @@ export default function Clubs() {
                         type="search"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Search by Club name or type..."
+                        placeholder="Search by student group name or type..."
                         className="h-[46px] rounded-none border-black/25 bg-white/80 pl-11 text-base font-medium focus-visible:border-black/35 focus-visible:ring-[3px] focus-visible:ring-sky/50"
                     />
                 </div>
@@ -101,8 +101,8 @@ export default function Clubs() {
                         value={sort}
                         onChange={(v) => setSort(v as SortKey)}
                         options={[
-                            { value: 'name', label: 'Club Name' },
-                            { value: 'type', label: 'Club Type' },
+                            { value: 'name', label: 'Group Name' },
+                            { value: 'type', label: 'Group Type' },
                         ]}
                     />
                     <label className="ml-1 flex cursor-pointer items-center gap-2 text-sm text-muted-foreground">
@@ -118,10 +118,10 @@ export default function Clubs() {
                 <div className="results-info-row">
                     <p className="text-[0.88rem] font-normal text-muted-foreground">
                         {loading
-                            ? 'Loading Clubs...'
+                            ? 'Loading student groups...'
                             : sorted.length === total
-                            ? 'Showing all clubs!'
-                            : `Showing ${sorted.length} of ${total} club${total !== 1 ? 's' : ''}`}
+                            ? 'Showing all student groups!'
+                            : `Showing ${sorted.length} of ${total} student group${total !== 1 ? 's' : ''}`}
                     </p>
                     <ViewToggle mode={view} onChange={setView} />
                 </div>
@@ -258,7 +258,7 @@ export default function Clubs() {
                     animate={{ opacity: 1 }}
                     className="mt-14 border border-dashed border-black/28 bg-white/50 p-14 text-center backdrop-blur-sm"
                 >
-                    <h2 className="text-lg font-medium text-foreground">No clubs found</h2>
+                    <h2 className="text-lg font-medium text-foreground">No student groups found</h2>
                     <p className="mt-1 text-sm text-muted-foreground">Try adjusting your search.</p>
                 </motion.div>
             )}
