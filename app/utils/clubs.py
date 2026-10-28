@@ -11,12 +11,13 @@ _cache = {"data": None, "ts": 0.0}
 
 class ClubList:
 
-    def __init__(self, type, name, desc, meeting, publish):
+    def __init__(self, type, name, desc, meeting, publish, leaders):
         self.type = type
         self.name = name
         self.desc = desc
         self.meeting = meeting
         self.publish = publish
+        self.leaders = leaders
 
     def to_dict(self):
         return {
@@ -25,6 +26,7 @@ class ClubList:
             "Club Meeting Time and Location": self.meeting,
             "Publish": self.publish,
             "Description of Club": self.desc,
+            "Student Leaders (and contact info)": self.leaders,
         }
 
     @classmethod
@@ -54,6 +56,7 @@ class ClubList:
                 meeting=col("Club Meeting Time and Location"),
                 type=col("Type of Club"),
                 publish=col("Publish"),
+                leaders=col("Student Leaders (and contact info)"),
             )
 
             clubs.append(class_obj)

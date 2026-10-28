@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
@@ -19,6 +19,32 @@ type ClubRow = {
     'Type of Club'?: string
     'Description of Club'?: string
     'Club Meeting Time and Location'?: string
+    'Student Leaders (and contact info)'?: string
+}
+
+// Autolink the email addresses in a free-text contact string like
+// "Andrew Nguyen anguyen28@nmhschool.org, Sam Lee slee29@nmhschool.org".
+const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g
+function linkifyEmails(text: string) {
+    const parts: ReactNode[] = []
+    let last = 0
+    let i = 0
+    text.replace(EMAIL_RE, (match, offset: number) => {
+        if (offset > last) parts.push(text.slice(last, offset))
+        parts.push(
+            <a
+                key={`m-${i++}`}
+                href={`mailto:${match}`}
+                className="font-normal text-navy underline underline-offset-2 hover:text-crimson"
+            >
+                {match}
+            </a>
+        )
+        last = offset + match.length
+        return match
+    })
+    if (last < text.length) parts.push(text.slice(last))
+    return parts
 }
 
 type SortKey = 'name' | 'type'
@@ -135,6 +161,7 @@ export default function Clubs() {
                         const type = c['Type of Club']
                         const meeting = c['Club Meeting Time and Location']
                         const desc = c['Description of Club']
+                        const leaders = c['Student Leaders (and contact info)']
                         const isOpen = expanded === i
                         return (
                             <div key={name + i} className="dir-list-item">
@@ -168,16 +195,12 @@ export default function Clubs() {
                                                 {desc}
                                             </div>
                                         )}
-                                        <div className="mt-2.5 text-[0.85rem]">
-                                            <a
-                                                href="https://docs.google.com/spreadsheets/d/1nJTH-l3URAc8BY6s6I9_aqDjWDCJVQE4Z64fbuP79Kw/edit?gid=2107835340#gid=2107835340"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="font-normal text-navy underline underline-offset-2 hover:text-crimson"
-                                            >
-                                                Click here for contact information
-                                            </a>
-                                        </div>
+                                        {leaders && (
+                                            <div className="mt-2.5 text-[0.9rem] leading-relaxed text-muted-foreground">
+                                                <span className="font-semibold text-foreground">Student leaders: </span>
+                                                {linkifyEmails(leaders)}
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </div>
@@ -197,6 +220,7 @@ export default function Clubs() {
                         const type = c['Type of Club']
                         const meeting = c['Club Meeting Time and Location']
                         const desc = c['Description of Club']
+                        const leaders = c['Student Leaders (and contact info)']
                         return (
                             <motion.div
                                 key={name + i}
@@ -236,16 +260,12 @@ export default function Clubs() {
                                         </>
                                     )}
 
-                                    <div className="mt-3 text-[0.85rem]">
-                                        <a
-                                            href="https://docs.google.com/spreadsheets/d/1nJTH-l3URAc8BY6s6I9_aqDjWDCJVQE4Z64fbuP79Kw/edit?gid=2107835340#gid=2107835340"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="font-normal text-navy underline underline-offset-2 hover:text-crimson"
-                                        >
-                                            Click here for contact information
-                                        </a>
-                                    </div>
+                                    {leaders && (
+                                        <div className="mt-3 text-[0.9rem] leading-relaxed text-muted-foreground">
+                                            <span className="font-semibold text-foreground">Student leaders: </span>
+                                            {linkifyEmails(leaders)}
+                                        </div>
+                                    )}
                             </motion.div>
                         )
                     })}

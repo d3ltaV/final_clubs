@@ -71,6 +71,7 @@ def api_search():
                 str(r.get("Type of Club", "")),
                 str(r.get("Description of Club", "")),
                 str(r.get("Club Meeting Time and Location", "")),
+                str(r.get("Student Leaders (and contact info)", "")),
             ]).lower()
         ])
 
