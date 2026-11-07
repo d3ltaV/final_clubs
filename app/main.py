@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request, jsonify, send_from_directory, abort
+from flask_compress import Compress
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,6 +21,7 @@ app = Flask(
     static_folder="static",
     static_url_path="/static",
 )
+Compress(app)
 
 
 @app.route("/api/config")

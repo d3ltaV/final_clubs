@@ -8,6 +8,7 @@ click
 colorama
 Flask
 Flask-Assets
+Flask-Compress
 h11
 idna
 iniconfig
