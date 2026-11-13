@@ -105,7 +105,7 @@ export default function Home() {
                     style={{ minHeight: 360, maxHeight: 440 }}
                 >
                     <img
-                        src="/static/images/pig.webp"
+                        src="/static/images/pig.png"
                         alt="Hogger News pig mascot"
                         className="w-auto object-contain"
                         style={{ width: 'min(280px, 70%)', maxHeight: 340, height: 'auto' }}

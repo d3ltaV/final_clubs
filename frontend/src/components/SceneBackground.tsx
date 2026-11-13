@@ -56,43 +56,11 @@ export function SceneBackground() {
     return (
         <div className="scene-bg" aria-hidden>
             <div className="scene-bg__art">
-                {/* Night covers sunset at page-top, so it must paint FIRST.
-                   Without this the browser sometimes delivers sunset first and
-                   you see a sunrise flash before night covers it. */}
-                <img
-                    src="/static/images/scene-night.webp"
-                    alt=""
-                    className="scene-layer scene-layer--night"
-                    fetchPriority="high"
-                    decoding="async"
-                />
-                <img
-                    src="/static/images/scene-sunset.webp"
-                    alt=""
-                    className="scene-layer scene-layer--sunset"
-                    decoding="async"
-                />
-                <img
-                    src="/static/images/scene-moon.webp"
-                    alt=""
-                    className="scene-layer scene-layer--moon"
-                    fetchPriority="high"
-                    decoding="async"
-                />
-                <img
-                    src="/static/images/scene-stars.webp"
-                    alt=""
-                    className="scene-layer scene-layer--stars"
-                    decoding="async"
-                />
-                {/* Sun only appears once the user scrolls near the bottom. */}
-                <img
-                    src="/static/images/scene-sun.webp"
-                    alt=""
-                    className="scene-layer scene-layer--sun"
-                    loading="lazy"
-                    decoding="async"
-                />
+                <img src="/static/images/scene-sunset.webp" alt="" className="scene-layer scene-layer--sunset" />
+                <img src="/static/images/scene-night.webp" alt="" className="scene-layer scene-layer--night" />
+                <img src="/static/images/scene-sun.webp" alt="" className="scene-layer scene-layer--sun" />
+                <img src="/static/images/scene-stars.webp" alt="" className="scene-layer scene-layer--stars" />
+                <img src="/static/images/scene-moon.webp" alt="" className="scene-layer scene-layer--moon" />
             </div>
             <div className="scene-bg__haze" />
         </div>

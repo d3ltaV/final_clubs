@@ -61,7 +61,7 @@ export function Layout() {
                 </button>
 
                 <NavLink to="/" className="flex items-center gap-2 shrink-0 no-underline sm:gap-2.5">
-                    <img src="/static/images/pig.webp" alt="" className="h-9 w-auto sm:h-11" />
+                    <img src="/static/images/pig.png" alt="" className="h-9 w-auto sm:h-11" />
                     <span className="text-[0.95rem] font-semibold tracking-tight text-navy sm:text-[1.1rem]">
                         <span className="sm:hidden">Hogger News</span>
                         <span className="hidden sm:inline">Hogger News Wayfinder</span>
@@ -116,7 +116,7 @@ export function Layout() {
                         >
                             <div className="flex items-center justify-between border-b border-black/10 px-4" style={{ minHeight: 56 }}>
                                 <div className="flex items-center gap-2">
-                                    <img src="/static/images/pig.webp" alt="" className="h-7 w-auto" />
+                                    <img src="/static/images/pig.png" alt="" className="h-7 w-auto" />
                                     <span className="text-[0.9rem] font-semibold tracking-tight text-navy">
                                         Hogger News
                                     </span>
