@@ -137,7 +137,7 @@ export default function Home() {
                         margin: '0 0 16px 0',
                     }}
                 >
-                    Hogger News Wayfinder
+                    Hogger News Navigator
                 </motion.p>
 
                 <div className="features-grid">

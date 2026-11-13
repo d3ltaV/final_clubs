@@ -64,7 +64,7 @@ export function Layout() {
                     <img src="/static/images/pig.png" alt="" className="h-9 w-auto sm:h-11" />
                     <span className="text-[0.95rem] font-semibold tracking-tight text-navy sm:text-[1.1rem]">
                         <span className="sm:hidden">Hogger News</span>
-                        <span className="hidden sm:inline">Hogger News Wayfinder</span>
+                        <span className="hidden sm:inline">Hogger News Navigator</span>
                     </span>
                 </NavLink>
 
